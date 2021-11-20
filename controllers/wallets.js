@@ -1,8 +1,25 @@
 'use strict';
-const Api = require("../definitions/Api");
+const Api = require("../helpers/Api");
 require('console-stamp')(console, {
     format: ':date(dd/mm/yyyy HH:MM:ss.l).yellow :label(7).white '
 });
+
+exports.welcome = async (req, res) => {
+
+    let response = {}, invoke, dataString, resp;
+
+    try{
+
+        response = {"message": "Welcome to Wallet"};
+        console.info(response);
+        res.json(response);
+
+    }catch(error){
+        response = {success: false, message: 'Error: '+ error.message};
+        console.info('RES: ', response);
+        res.status(500).json(response);
+    }
+}
 
 exports.listaddressgroupings = async (req, res) => {
 
