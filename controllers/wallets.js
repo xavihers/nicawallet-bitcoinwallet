@@ -4,24 +4,7 @@ require('console-stamp')(console, {
     format: ':date(dd/mm/yyyy HH:MM:ss.l).yellow :label(7).white '
 });
 
-exports.welcome = async (req, res) => {
-
-    let response = {}, invoke, dataString, resp;
-
-    try{
-
-        response = {"message": "Welcome to Wallet"};
-        console.info(response);
-        res.json(response);
-
-    }catch(error){
-        response = {success: false, message: 'Error: '+ error.message};
-        console.info('RES: ', response);
-        res.status(500).json(response);
-    }
-}
-
-exports.listaddressgroupings = async (req, res) => {
+exports.listaddressgroupings = async (data,req) => {
 
     let response = {}, invoke, dataString, resp;
 
@@ -34,17 +17,17 @@ exports.listaddressgroupings = async (req, res) => {
         
         response.data = (resp.status == 200) ? resp.data : {};
         response.success = true;
-        console.log(JSON.stringify(response));
+        console.log(`Method: ${req.method} | get | message: List address groupins get succesfully`);
         res.json(response);
 
     }catch(error){
         response = {success: false, message: 'Error: '+ error.message};
-        console.log('RES: ', response);
+        console.log(`Method: ${req.method} | get | ${error.message}`);
         res.status(500).json(response);
     }
 }
 
-exports.listlabels = async (req, res) => {
+exports.listlabels = async (data, route) => {
 
     let response = {}, invoke, dataString, resp, {transaction} = req.body;
 
@@ -61,12 +44,12 @@ exports.listlabels = async (req, res) => {
         
         response.data = (resp.status == 200) ? resp.data : {};
         response.success = true;
-        console.log(JSON.stringify(response));
+        console.log(`Method: ${req.method} | get | message: List labels get succesfully`);
         res.json(response);
 
     }catch(error){
         response = {success: false, message: 'Error: '+ error.message};
-        console.log('RES: ', response);
+        console.log(`Method: ${req.method} | get | ${error.message}`);
         res.status(500).json(response);
     }
 }

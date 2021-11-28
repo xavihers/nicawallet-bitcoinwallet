@@ -9,6 +9,8 @@ const db = require('./config/database');
 require('console-stamp')(console, {
     format: ':date(dd/mm/yyyy HH:MM:ss.l).yellow :label(7).white '
 });
+const Os = require('os');
+const moment = require('moment');
 
 //Connecting to mongodb
 db.connect();
@@ -23,7 +25,15 @@ readdirSync("./routes").map((r) => app.use("/", require("./routes/" + r)));
 
 //set port
 app.listen(process.env.PORT, function(){
-    console.info('Node app is running on port ' + process.env.PORT);
+    console.log('==================== HTTP =======================');
+	console.log('PID         : ' + process.pid);
+	console.log('Node.js     : ' + process.version);
+	console.log('OS          : ' + Os.platform() + ' ' + Os.release());
+	console.log('====================================================');
+	console.log('Date        : ' + moment().utc().format('yyyy-MM-DD HH:mm:ss'));
+    console.log('Node app is running on port: ' + process.env.PORT);
+	console.log('====================================================\n');
+    
 });
 
 module.exports = app;
