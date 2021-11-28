@@ -1,1 +1,1 @@
-# nicawallet-rpcwallet
+# nicawallet-bitcoinwallet
